@@ -2,7 +2,7 @@ mod logic;
 use clap::Parser;
 
 #[derive(Parser, Debug)]
-#[command(version= "1.0", about = "extract all the images from a website", long_about = None)]
+#[command(version= "1.0", about = "Spider", long_about = None)]
 struct Args {
     url: String,
 
