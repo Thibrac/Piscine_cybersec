@@ -2,7 +2,7 @@ use exif::Reader;
 use std::fs::File;
 use std::io::BufReader;
 
-pub fn extract_exif(file_path: &str) -> Result<(), Box<dyn std::error::Error>> {
+pub fn data_jpg(file_path: &str) -> Result<(), Box<dyn std::error::Error>> {
     let file = File::open(file_path)?;
     let mut bufreader = BufReader::new(&file);
 
@@ -14,3 +14,19 @@ pub fn extract_exif(file_path: &str) -> Result<(), Box<dyn std::error::Error>> {
     }
     Ok(())
 }
+
+pub fn data_png(file_path: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let file = File::open(file_path)?;
+    let decoder = png::Decoder::new(file);
+    let reader = decoder.read_info()?;
+
+    let (width, height) = reader.info().size();
+    let (color_type, bit_depth) = reader.output_color_type();
+
+    println!("Dimensions : {} x {} px", width, height);
+    println!("Color type: {:?}", color_type);
+    println!("Bit depth : {:?}", bit_depth);
+    Ok(())
+}
+
+// pub fn data_gif(file_path: &str) -> Result<(), Box<dyn std::error::Error>> {}
