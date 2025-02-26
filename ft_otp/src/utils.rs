@@ -11,5 +11,6 @@ pub fn check_gfile(file_path: &str) -> Result<(bool, String), Box<dyn std::error
     } else if !buffer.chars().all(|c| c.is_ascii_hexdigit()) {
         return Ok((false, buffer));
     }
+
     Ok((true, buffer))
 }

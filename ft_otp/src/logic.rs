@@ -8,8 +8,11 @@ use std::io::{Read, Write};
 use std::time::SystemTime;
 
 pub fn crypt_process(input: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let mut input = input.to_string();
+    if input.len() % 2 != 0 {
+        input.push('0');
+    }
     let input_bytes = hex::decode(input)?;
-
     let mut block1 = GenericArray::clone_from_slice(&input_bytes[0..16]);
     let mut block2 = GenericArray::clone_from_slice(&input_bytes[16..32]);
 
@@ -94,5 +97,5 @@ pub fn totp(key: &Vec<u8>) -> u32 {
         | ((hmac[offset + 1] as u32) << 16)
         | ((hmac[offset + 2] as u32) << 8)
         | (hmac[offset + 3] as u32);
-    value % 1_000_000
+    value % 1000000
 }

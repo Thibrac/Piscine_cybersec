@@ -38,6 +38,9 @@ fn main() {
         }
     } else {
         if let Some(k_file) = args.k_file {
+            if k_file != "ft_otp.key" {
+                panic!("Error: usage is -k <ft_otp.key>");
+            }
             match logic::decrypt_process(&k_file) {
                 Ok(vec) => {
                     let res_totp = logic::totp(&vec);
