@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SweetShadow | Confiseries Clandestines</title>
+    <style>
+        /* Base styles */
+        :root {
+            --bg-color: #121212;
+            --text-color: #f0f0f0;
+            --accent-pink: #ff00ff;
+            --accent-blue: #00ffff;
+            --accent-green: #00ff00;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--accent-pink);
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--accent-pink);
+            text-shadow: 0 0 10px var(--accent-pink), 0 0 20px var(--accent-pink);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+            text-shadow: 0 0 5px var(--accent-blue);
+            letter-spacing: 2px;
+        }
+        
+        /* Navigation */
+        nav {
+            margin: 20px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            text-shadow: 0 0 5px var(--accent-green);
+        }
+        
+        /* Hero section */
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23121212"/><path d="M0 50 L100 50 M50 0 L50 100" stroke="%23333" stroke-width="0.5"/></svg>');
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-blue);
+            text-shadow: 0 0 10px var(--accent-blue);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: transparent;
+            color: var(--accent-pink);
+            border: 2px solid var(--accent-pink);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--accent-pink);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px var(--accent-pink);
+        }
+        
+        /* Products section */
+        .products {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--accent-green);
+            text-shadow: 0 0 8px var(--accent-green);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 2px;
+            background-color: var(--accent-green);
+            margin: 10px auto;
+            box-shadow: 0 0 8px var(--accent-green);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+        }
+        
+        .product-name {
+            font-size: 1.5rem;
+            margin: 15px 0;
+            color: var(--accent-blue);
+        }
+        
+        .product-description {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            color: var(--accent-pink);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 150px;
+            background-color: #222;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--accent-pink);
+        }
+        
+        /* How it works section */
+        .how-it-works {
+            padding: 40px 0;
+            background-color: rgba(20, 20, 20, 0.5);
+            margin: 30px 0;
+            border-radius: 5px;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: var(--accent-green);
+            color: var(--bg-color);
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .step-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent-blue);
+        }
+        
+        /* Contact section */
+        .contact {
+            padding: 40px 0;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 30px;
+            border-radius: 5px;
+            border: 1px solid #333;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--accent-blue);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: #222;
+            border: 1px solid #444;
+            color: var(--text-color);
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 5px var(--accent-pink);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--accent-pink);
+            margin-top: 40px;
+        }
+        
+        .disclaimer {
+            font-size: 0.8rem;
+            color: #777;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Terminal effect */
+        .terminal-effect {
+            position: relative;
+        }
+        
+        .terminal-effect::after {
+            content: "_";
+            display: inline-block;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">SweetShadow</div>
+            <div class="tagline">Confiseries Clandestines</div>
+            <nav>
+                <ul>
+                    <li><a href="#products">Produits</a></li>
+                    <li><a href="#how">Comment ça marche</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <h2 class="terminal-effect">Bienvenue dans le réseau sucré</h2>
+            <p>Découvrez notre collection exclusive de confiseries rares et introuvables ailleurs. Livraison anonyme garantie.</p>
+            <a href="#products" class="cta-button">Explorer</a>
+        </section>
+        
+        <section id="products" class="products">
+            <h2 class="section-title">Nos Produits</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">🍭</div>
+                    <h3 class="product-name">CryptoCandy</h3>
+                    <p class="product-description">Bonbons acidulés aux saveurs mystérieuses qui changent à chaque dégustation.</p>
+                    <div class="product-price">15 €</div>
+                    <a href="#contact" class="cta-button">Commander</a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">🍬</div>
+                    <h3 class="product-name">Shadow Sweets</h3>
+                    <p class="product-description">Caramels noirs infusés avec des épices rares d'Asie du Sud-Est.</p>
+                    <div class="product-price">20 €</div>
+                    <a href="#contact" class="cta-button">Commander</a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">🧁</div>
+                    <h3 class="product-name">Byte Bites</h3>
+                    <p class="product-description">Chocolats en forme de composants informatiques avec un cœur fondant.</p>
+                    <div class="product-price">25 €</div>
+                    <a href="#contact" class="cta-button">Commander</a>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">🍫</div>
+                    <h3 class="product-name">Encrypted Bars</h3>
+                    <p class="product-description">Barres chocolatées avec des motifs de code binaire et un goût inoubliable.</p>
+                    <div class="product-price">18 €</div>
+                    <a href="#contact" class="cta-button">Commander</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="how" class="how-it-works">
+            <h2 class="section-title">Comment ça marche</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Choisissez</h3>
+                    <p>Parcourez notre catalogue secret et sélectionnez vos confiseries préférées.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Commandez</h3>
+                    <p>Utilisez notre formulaire sécurisé pour passer votre commande en toute discrétion.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Recevez</h3>
+                    <p>Votre colis anonyme sera livré dans un emballage discret à l'adresse de votre choix.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="contact">
+            <h2 class="section-title">Contactez-nous</h2>
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="code-name">Nom de code</label>
+                    <input type="text" id="code-name" placeholder="Votre pseudonyme">
+                </div>
+                
+                <div class="form-group">
+                    <label for="drop-location">Point de livraison</label>
+                    <input type="text" id="drop-location" placeholder="Adresse de livraison">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-method">Méthode de contact</label>
+                    <input type="text" id="contact-method" placeholder="Email ou autre moyen de communication">
+                </div>
+                
+                <div class="form-group">
+                    <label for="order-details">Détails de la commande</label>
+                    <textarea id="order-details" rows="5" placeholder="Listez les produits que vous souhaitez commander"></textarea>
+                </div>
+                
+                <a href="#" class="cta-button">Envoyer</a>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2025 SweetShadow | Confiseries Clandestines</p>
+            <p class="disclaimer">Ce site est une création fictive. Aucune transaction réelle n'est effectuée. Tous les produits présentés sont imaginaires.</p>
+        </footer>
+    </div>
+</body>
+</html>
