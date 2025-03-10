@@ -4,6 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-clap = { version = "4.5.29", features = ["derive"] }
+clap = { version = "4.5.31", features = ["derive"] }
 reqwest = { version = "0.12.12", features = ["blocking"] }
-scraper = "=0.22.0"
+scraper = "0.23.1"
