@@ -1,4 +1,4 @@
-// mod free_files;
+mod free_files;
 mod atk_files;
 mod utils;
 use clap::Parser;

