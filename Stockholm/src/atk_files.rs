@@ -24,7 +24,7 @@ fn check_extension(extension: &OsStr) -> bool {
         ".dwg", ".pdf", ".wk1", ".wks", ".123", ".rtf", ".csv", ".txt", ".vsdx", ".vsd", ".edb",
         ".eml", ".msg", ".ost", ".pst", ".potm", ".potx", ".ppam", ".ppsx", ".ppsm", ".pps", ".pot",
         ".pptm", ".pptx", ".ppt", ".xltm", ".xltx", ".xlc", ".xlm", ".xlt", ".xlw", ".xlsb", ".xlsm",
-        ".xlsx", ".xls", ".dotx", ".dotm", ".dot", ".docm", ".docb", ".docx", ".doc", ".yml", ".conf", ".py", ".template"
+        ".xlsx", ".xls", ".dotx", ".dotm", ".dot", ".docm", ".docb", ".docx", ".doc", ".yml", ".conf", ".py", ".template", ".xpm"
     ];
     let ext_formated = format!(".{}", extension.to_str().unwrap());
     if let Some(_res) = valid_ext.into_iter().find(|&x| x == ext_formated) {
